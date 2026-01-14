@@ -1,47 +1,65 @@
+using JetBrains.Annotations;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlayerStats
 {
-    private int moveSpeed;
-    public int MoveSpeed
+     //private fields
+        private float moveSpeed;
+    private int maxHealth;
+    private int currentHealth;
+    //public properties
+    public float MoveSpeed
     {
         get
         {
-            //
-            //Modify what I can return in any way I want
-            //
             return moveSpeed;
         }
+        set
+        {
+            if (value > 20)
+            {
+                moveSpeed = 20;
+            }
+            else if ((value < 0)
+                {
+                moveSpeed = 0;
+            }
+            moveSpeed = value;
         }
-    private int maxHealth;
+
+    }
     public int MaxHealth
     {
-        get
-        {
-            //
-            //Modify what I can return in any way I want
-            //
-            return maxHealth;
-        }
+        get { return maxHealth; }
+        set { maxHealth = value; }
     }
-    private int jumpForce;
-    public int JumpForce
+        public int CurrentHealth
+    { 
+        get { return currentHealth; }
+        set
+        {
+            Mathf.Clamp(value, 0, 100);
+            Debug.Log($"Health set to: {currentHealth}");
+        
+            public  PlayerStats()
     {
-        get
-        {
-            //
-            //Modify what I can return in any way I want
-            //
-            return jumpForce;
-        }
+        moveSpeed = 10;
+        maxHealth = 100;
+        currentHealth = 100;
     }
-    public PlayerStats(int moveSpeed, int maxHealth, int jumpForce)
+    public PlayerStats(float moveSpeed, int maxHealth)
     {
         this.moveSpeed = moveSpeed;
         this.maxHealth = maxHealth;
-        this.jumpForce = jumpForce;
+        currentHealth = maxHealth;
+
+        Debug.Log($"Play initialized with MoveSpeed = {moveSpeed}, MaxHealth = {maxHealth}, CurrentHealth = {currentHealth}");
     }
-    Stats = new PlayerStats(5, 100, 5);
-}
+        }
+    
+         
+        
+        
+
 
