@@ -1,11 +1,9 @@
-using JetBrains.Annotations;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlayerStats
 {
      //private fields
-        private float moveSpeed;
+    private float moveSpeed;
     private int maxHealth;
     private int currentHealth;
     //public properties
@@ -21,8 +19,8 @@ public class PlayerStats
             {
                 moveSpeed = 20;
             }
-            else if ((value < 0)
-                {
+            else if (value < 0)
+            {
                 moveSpeed = 0;
             }
             moveSpeed = value;
@@ -34,15 +32,17 @@ public class PlayerStats
         get { return maxHealth; }
         set { maxHealth = value; }
     }
-        public int CurrentHealth
-    { 
+    public int CurrentHealth
+    {
         get { return currentHealth; }
         set
         {
             Mathf.Clamp(value, 0, 100);
             Debug.Log($"Health set to: {currentHealth}");
+        }
+    }
         
-            public  PlayerStats()
+    public PlayerStats()
     {
         moveSpeed = 10;
         maxHealth = 100;
@@ -56,7 +56,7 @@ public class PlayerStats
 
         Debug.Log($"Play initialized with MoveSpeed = {moveSpeed}, MaxHealth = {maxHealth}, CurrentHealth = {currentHealth}");
     }
-        }
+}
     
          
         

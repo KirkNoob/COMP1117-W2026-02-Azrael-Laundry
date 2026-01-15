@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
         {
             if (playerController != null)
             {
-                playerController.TakeDamage(15);
+                playerController.TakeDamage(damageToDeal);
             }
           
             Debug.Log("Attacking the player");

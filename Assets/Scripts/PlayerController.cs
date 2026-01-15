@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     }
     private void ApplyMovement()
     {
-        float velocityX = moveInput.x;
+        float velocityX = moveInput.x * stats.MoveSpeed;
         rBody.linearVelocity = new Vector2(velocityX, rBody.linearVelocity.y);
     }
     public void TakeDamage(int damageAmount)
