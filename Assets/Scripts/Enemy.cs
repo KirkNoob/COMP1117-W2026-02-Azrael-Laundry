@@ -1,21 +1,14 @@
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    [SerializeField] private PlayerController playerController;
-    [SerializeField] private int damageToDeal = 15;
-        public void OnAttack(InputValue value)
+    [Header("Enemy Settings")]
+    [SerializeField] private float patrolDistance = 5.0f;
+
+    protected override void Awake()
     {
-        if(value.isPressed)
-        {
-            if (playerController != null)
-            {
-                playerController.TakeDamage(damageToDeal);
-            }
-          
-            Debug.Log("Attacking the player");
-        }
+        base.Awake();
+
+        Debug.Log("Awake in Enemy.cs");
     }
 }
