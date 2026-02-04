@@ -15,6 +15,7 @@ public class Player : Character
     private Rigidbody2D rBody;          // Used to apply a force to move or jump
     private PlayerInputHandler input;   // Reads the input
     private bool isGrounded;            // Holds the result of the ground check operation
+    private float currentSpeedModifier = 0.5f;
 
     /*
      * TO-DO: Add isGrounded property to help trigger animation
@@ -62,7 +63,7 @@ public class Player : Character
     {
         // We get MoveInput from InputHandler
         // We get MoveSpeed from our Parent class (Character)
-        float horizontalVelocity = input.MoveInput.x * MoveSpeed;
+        float horizontalVelocity = input.MoveInput.x * MoveSpeed * currentSpeedModifier;
 
         rBody.linearVelocity = new Vector2(horizontalVelocity, rBody.linearVelocity.y);
     }
@@ -85,5 +86,9 @@ public class Player : Character
         rBody.linearVelocity = new Vector2(rBody.linearVelocity.x, 0);
 
         rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+    public void ApplySpeedModifier(float speedModifier)
+    {
+        currentSpeedModifier = speedModifier;
     }
 }

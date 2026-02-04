@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Animator))]
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     // Private variables
     [Header("Character Stats")]
@@ -57,10 +57,21 @@ public class Character : MonoBehaviour
             Die();
         }
     }
-
-    protected void Die()
+    // Each child object will implement their own death.
+    public abstract void Die();
     {
         isDead = true;
         Debug.Log($"{gameObject.name} has died.");
+        public override void Die()
+    {
+        isDead = true;
+        Debug.Log("Player has died");
+        //PLAYER DEATH LOGIC!
+        //===============================
+        //Add player specific death logic
+        //Set death animation
+        //Trigger death UI
+        //Initiate level reset logic
+    }
     }
 }

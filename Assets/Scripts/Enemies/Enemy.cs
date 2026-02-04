@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : Character
@@ -6,7 +7,7 @@ public class Enemy : Character
     [SerializeField] private float patrolDistance = 5.0f;
 
     private Vector2 startPos;
-    private int direction = -1 
+    private int direction = -1; 
     protected override void Awake()
     {
         base.Awake();
@@ -29,5 +30,14 @@ public class Enemy : Character
             transform.localScale = new Vector3(-1, 1, 1);
 
         }
+    }
+    public override void Die()
+    {
+        Debug.Log("Enemy is dead");
+        //ENEMY DEATH LOGIC!
+        //==================
+        //Award points / LooseAssemblyNameOptionTree to the player
+        //player death animation
+        //Destroy the enemy
     }
 }
