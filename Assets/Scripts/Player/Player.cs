@@ -15,7 +15,7 @@ public class Player : Character
     private Rigidbody2D rBody;          // Used to apply a force to move or jump
     private PlayerInputHandler input;   // Reads the input
     private bool isGrounded;            // Holds the result of the ground check operation
-    private float currentSpeedModifier = 0.5f;
+    private float currentSpeedModifier = 1f;
 
     /*
      * TO-DO: Add isGrounded property to help trigger animation
@@ -31,15 +31,18 @@ public class Player : Character
 
     private void Update()
     {
-   
         // Perform my ground check
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         Debug.Log(isGrounded);
 
-        anim.SetFloat("xVelocity", rBody.linearVelocity.x);
-        anim.SetBool("IsGrounded", isGrounded);
+        anim.SetFloat("xVelocity", Mathf.Abs(rBody.linearVelocity.x));
+
+        // Jumping
+        anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rBody.linearVelocity.y);
-        if(input,MoveInput.x !=0))
+
+        // Handle sprite flipping
+        if (input.MoveInput.x != 0 && !isDead)
         {
             transform.localScale = new Vector3(Mathf.Sign(input.MoveInput.x), 1, 1);
         }
@@ -66,6 +69,8 @@ public class Player : Character
         float horizontalVelocity = input.MoveInput.x * MoveSpeed * currentSpeedModifier;
 
         rBody.linearVelocity = new Vector2(horizontalVelocity, rBody.linearVelocity.y);
+
+        currentSpeedModifier = 1f;
     }
 
     private void HandleJump()
@@ -87,8 +92,22 @@ public class Player : Character
 
         rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
+
     public void ApplySpeedModifier(float speedModifier)
     {
         currentSpeedModifier = speedModifier;
+    }
+
+    public override void Die()
+    {
+        isDead = true;
+        Debug.Log("Player has died");
+
+        // PLAYER DEATH LOGIC!
+        // ===================
+        // Add player specific death logic
+        // Set death animation
+        // Trigger death UI
+        // Initiate level reset logic
     }
 }

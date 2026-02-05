@@ -11,7 +11,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int currentHealth;
 
-    private bool isDead = false;
+    protected bool isDead = false;
     protected Animator anim;
 
     // Public properties
@@ -32,7 +32,6 @@ public abstract class Character : MonoBehaviour
         get { return currentHealth; }
         set { currentHealth = Mathf.Clamp(value, 0, maxHealth); }
     }
-
 
     protected virtual void Awake()
     {
@@ -57,21 +56,7 @@ public abstract class Character : MonoBehaviour
             Die();
         }
     }
+
     // Each child object will implement their own death.
     public abstract void Die();
-    {
-        isDead = true;
-        Debug.Log($"{gameObject.name} has died.");
-        public override void Die()
-    {
-        isDead = true;
-        Debug.Log("Player has died");
-        //PLAYER DEATH LOGIC!
-        //===============================
-        //Add player specific death logic
-        //Set death animation
-        //Trigger death UI
-        //Initiate level reset logic
-    }
-    }
 }
